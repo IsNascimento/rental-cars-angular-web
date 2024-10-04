@@ -1,0 +1,37 @@
+h1 {
+  font-size: 30px; /* Define o tamanho do texto do h1 */
+  color: #333; /* Cor do texto */
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+/* Estiliza a lista de carros */
+ul {
+  list-style-type: none; /* Remove as bolinhas da lista */
+  padding: 0; /* Remove a margem interna */
+  max-width: 600px; /* Define uma largura máxima */
+  margin: 0 auto; /* Centraliza a lista na página */
+}
+
+/* Estiliza cada item da lista */
+li {
+  background-color: #ce1f1f; /* Cor de fundo para cada item */
+  margin: 0.5rem 0; /* Espaçamento entre itens */
+  padding: 1rem; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para efeito de elevação */
+  display: flex; /* Flexbox para alinhamento */
+  justify-content: space-between; /* Distribui o espaço entre elementos */
+  align-items: center; /* Alinha verticalmente ao centro */
+}
+
+/* Estiliza o texto forte */
+strong {
+  font-size: 1.2rem; /* Tamanho do texto do modelo */
+  color: #007bff; /* Cor do texto do modelo */
+}
+
+/* Estiliza o texto dentro do item */
+li span {
+  color: #555; /* Cor do texto para ano e fabricante */
+}

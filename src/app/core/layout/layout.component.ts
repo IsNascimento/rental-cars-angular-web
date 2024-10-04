@@ -36,7 +36,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Item Menu 1',
+        label: 'Teste de Menu Alterado',
         icon: 'fa fa-search fa-lg',
         command: () => {},
       },
