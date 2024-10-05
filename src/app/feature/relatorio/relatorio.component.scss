@@ -1,0 +1,19 @@
+.card {
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.upload-container {
+  width: 100%;
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.file-info {
+  margin: 10px 0;
+}

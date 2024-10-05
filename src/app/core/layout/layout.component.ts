@@ -8,6 +8,7 @@ import { FooterComponent } from '../template/footer/footer.component';
 import { HeaderComponent } from '../template/header/header.component';
 import { SideMenuComponent } from '../template/side-menu/side-menu.component';
 import { TOOGLE_SIDEBAR } from './layout.animation';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-layout',
@@ -20,6 +21,7 @@ import { TOOGLE_SIDEBAR } from './layout.animation';
     ToastModule,
     ConfirmDialogModule,
     BreadcrumbModule,
+    HttpClientModule
   ],
   providers: [MessageService, ConfirmationService],
   animations: [TOOGLE_SIDEBAR],
@@ -45,7 +47,7 @@ export class LayoutComponent implements OnInit {
       {
         label: 'Relatorios',
         icon: 'fa fa-file fa-lg',
-        command: () => this.router.navigate(['/relatorios']),
+        command: () => this.router.navigate(['/relatorio']),
       },
     ];
   }

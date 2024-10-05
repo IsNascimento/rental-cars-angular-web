@@ -1,0 +1,19 @@
+<div class="card">
+  <h2>Upload de Arquivos</h2>
+  <p-fileUpload
+    name="files[]"
+    (onUpload)="onUpload($event)"
+    [customUpload]="true"
+    (uploadHandler)="onUpload($event)"
+    accept=".rtn"
+    [auto]="false"
+    [multiple]="true"
+  >
+  </p-fileUpload>
+  <div style="padding: 15px 0px 0px 0px">
+    <p-button
+      label="Processar arquivo"
+      (onClick)="processarArquivo()"
+    />
+  </div>
+</div>
