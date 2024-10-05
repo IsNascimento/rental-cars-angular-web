@@ -18,11 +18,11 @@ import { RelatorioService } from './service/relatorio.service';
 export class RelatorioComponent {
   uploadedFiles: any[] = [];
   formData: FormData | undefined;
-  arquivoEnviado: boolean = false;
 
   constructor(
     private http: HttpClient,
-    private relatorioService: RelatorioService
+    private relatorioService: RelatorioService,
+    private messageService: MessageService
   ) {}
 
   onUpload(event: any) {
@@ -37,10 +37,51 @@ export class RelatorioComponent {
     formData.append('file', file, file.name);
 
     this.formData = formData;
-    this.arquivoEnviado = true;
+    if (!this.formData) {
+      this.showError('Falha no carregamento do arquivo');
+      return;
+    }
+
+    this.showSuccess('Arquivo carregado com sucesso. Pronto para processar.');
   }
 
   processarArquivo() {
-    this.relatorioService.enviarArquivo(this.formData);
+    if (!this.formData) {
+      this.showError('Nenhum arquivo selecionado');
+      return;
+    }
+
+    this.relatorioService.enviarArquivo(this.formData).subscribe(
+      (response) => {
+        console.log('Processamento bem-sucedido', response);
+        this.showSuccess('Processamento bem-sucedido.');
+      },
+      (error) => {
+        console.error('Erro ao processar arquivo', error);
+        const errorMessage = error.error
+          ? error.error
+          : 'Erro ao processar arquivo.';
+        this.showError(errorMessage);
+      }
+    );
+
+    this.formData = undefined;
+  }
+
+  showSuccess(detail: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail,
+    });
+  }
+
+  showError(detail: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erro',
+      detail,
+      life: 5000,
+    });
   }
 }

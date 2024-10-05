@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,10 @@ export class RelatorioService {
 
   constructor(private httpClient: HttpClient) {}
 
-  enviarArquivo(formData: FormData | undefined) {
-    return this.httpClient.post(this.API, formData).subscribe(
-      (response) => {
-        console.log('Processamento bem-sucedido', response);
-      }
-    );
+  enviarArquivo(formData: FormData | undefined): Observable<any> {
+    const headers = new HttpHeaders({
+      'Accept': 'text/plain'
+    });
+    return this.httpClient.post(this.API, formData, { headers, responseType: 'text' });
   }
 }

@@ -1,19 +1,30 @@
+<h1>Relatório</h1>
 <div class="card">
   <h2>Upload de Arquivos</h2>
-  <p-fileUpload
-    name="files[]"
-    (onUpload)="onUpload($event)"
-    [customUpload]="true"
-    (uploadHandler)="onUpload($event)"
-    accept=".rtn"
-    [auto]="false"
-    [multiple]="true"
+  <p-toast></p-toast>
+  <div
+    style="display: flex; align-items: center; justify-content: space-between"
   >
-  </p-fileUpload>
-  <div style="padding: 15px 0px 0px 0px">
-    <p-button
-      label="Processar arquivo"
-      (onClick)="processarArquivo()"
-    />
+    <div style="flex: 0 0 70%">
+      <p-fileUpload
+        name="files[]"
+        (onSelect)="onUpload($event)"
+        [showUploadButton]="false"
+        chooseLabel="Selecione arquivo"
+        cancelLabel="Cancelar"
+        accept=".rtn"
+        [maxFileSize]="1000000"
+        [auto]="false"
+        [multiple]="false"
+        [fileLimit]="1"
+      />
+    </div>
+    <div style="flex: 0 0 auto; padding-left: 15px">
+      <p-button
+        icon="pi pi-check"
+        label="Processar arquivo"
+        (onClick)="processarArquivo()"
+      />
+    </div>
   </div>
 </div>

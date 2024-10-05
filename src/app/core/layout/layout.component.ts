@@ -31,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class LayoutComponent implements OnInit {
   items!: MenuItem[];
 
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
+  breadcumbs: MenuItem[] = [{ label: '' }];
 
   breadcumbsHome!: MenuItem;
 
@@ -42,7 +42,7 @@ export class LayoutComponent implements OnInit {
       {
         label: 'Alugueis',
         icon: 'fa fa-car fa-lg',
-        command: () => this.router.navigate(['/alugueis']),
+        command: () => this.router.navigate(['']),
       },
       {
         label: 'Relatorios',
