@@ -13,9 +13,8 @@ import { Aluguel } from '../model/aluguel';
 import { AlugueisService } from '../service/alugueis.service';
 
 interface Modelo {
-  modelo: string;
+  nome: string;
 }
-
 @Component({
   selector: 'app-alugueis',
   standalone: true,
@@ -37,12 +36,10 @@ export class AlugueisComponent {
   alugueis: Aluguel[] = [];
   filteredAlugueis: Aluguel[] = [];
   modelos: string[] = [];
-  modelosOptions: Modelo[] = [{ modelo: '' }];
+  modelosOptions: Modelo[] = [];
+  modeloSelecionado: Modelo = { nome: '' };
   dataSelecionada: Date | null = null;
-  modeloSelecionado: string = '';
   valorTotalNaoPago: number = 0;
-
-  //private readonly API = 'api/alugueis';
 
   constructor(
     private alugueisService: AlugueisService,
@@ -50,47 +47,75 @@ export class AlugueisComponent {
     private route: ActivatedRoute
   ) {
     this.alugueisResponse$ = this.alugueisService.list();
-
     this.loadAlugueis();
   }
 
-  loadAlugueis() {
-    this.alugueisResponse$.subscribe((data) => {
-      this.alugueis = data.alugueis;
-      this.valorTotalNaoPago = data.valorTotalNaoPago;
+  loadAlugueis(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.alugueisResponse$.subscribe(
+        (data) => {
+          this.alugueis = data.alugueis;
+          this.valorTotalNaoPago = data.valorTotalNaoPago;
 
-      const modelosUnicos = [
-        ...new Set(this.alugueis.map((a) => a.modeloCarro)),
-      ];
-      this.modelosOptions = [
-        { modelo: 'Todos os modelos' },
-        ...modelosUnicos.map((modelo) => ({ modelo } as Modelo)),
-      ];
-
-      console.log(this.alugueis);
-      console.log(this.valorTotalNaoPago);
+          const modelosUnicos = [
+            ...new Set(this.alugueis.map((a) => a.modeloCarro)),
+          ];
+          this.modelosOptions = [
+            { nome: 'Todos os modelos' },
+            ...modelosUnicos.map((modelo) => ({ nome: modelo } as Modelo)),
+          ];
+          resolve();
+        },
+        (error) => {
+          reject(error);
+        }
+      );
     });
   }
 
-  onSearch() {
+  async onSearch() {
     this.filterAlugueis(this.dataSelecionada, this.modeloSelecionado);
-    console.log(this.filteredAlugueis);
   }
 
-  filterAlugueis(date: Date | null, modelo: string) {
-    if (!date && (modelo.length === 0 || !modelo)) {
-      return;
+  async filterAlugueis(date: Date | null, modelo: Modelo) {
+    if (!date && ('Todos os modelos' === modelo.nome || '' === modelo.nome)) {
+      await this.loadAlugueis();
+    } else {
+      await this.loadAlugueis();
+      this.filteredAlugueis = this.alugueis.filter((aluguel) => {
+        const dateMatches = date
+          ? aluguel.dataAluguel === this.formatDate(date)
+          : true;
+
+        const modelMatches =
+          modelo && modelo.nome != ''
+            ? aluguel.modeloCarro.toLowerCase() === modelo.nome.toLowerCase()
+            : true;
+
+        return dateMatches && modelMatches;
+      });
+      this.alugueis = this.filteredAlugueis;
+      if (this.alugueis.length === 0) {
+        this.valorTotalNaoPago = 0;
+      } else {
+        this.somarDebitos();
+      }
     }
+  }
 
-    this.filteredAlugueis = this.alugueis.filter((aluguel) => {
-      const dateMatches = date
-        ? new Date(aluguel.dataAluguel).toDateString() === date.toDateString()
-        : true;
+  formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
-      const modelMatches = modelo ? aluguel.modeloCarro === modelo : true;
-
-      return dateMatches && modelMatches; // Retorna se a data ou modelo coincidem
+  somarDebitos() {
+    this.alugueis.forEach((aluguel) => {
+      this.valorTotalNaoPago = 0;
+      if (aluguel.pago.toLowerCase() === 'nao') {
+        this.valorTotalNaoPago += parseFloat(aluguel.valor);
+      }
     });
   }
-
 }
