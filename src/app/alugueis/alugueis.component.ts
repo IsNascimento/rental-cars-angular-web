@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-alugueis',
   standalone: true,
-  imports: [NgIf],
+  imports: [CommonModule],
   templateUrl: './alugueis.component.html',
-  styleUrl: './alugueis.component.scss'
+  styleUrls: ['./alugueis.component.scss']
 })
 export class FileUploadComponent {
   fileName = '';
   selectedFile: File | null = null;
+  showSuccessMessage = false;
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -21,11 +22,14 @@ export class FileUploadComponent {
     }
   }
 
-  processFile(){
-    if(this.selectedFile) {
+  processFile() {
+    if (this.selectedFile) {
       setTimeout(() => {
-        alert('Arquivo processado com sucesso');
-      }, 1000)
+        this.showSuccessMessage = true;
+        setTimeout(() => this.showSuccessMessage = false, 3000);
+      }, 1000);
+    } else {
+      alert('Por favor, selecione um arquivo primeiro.');
     }
   }
 }
