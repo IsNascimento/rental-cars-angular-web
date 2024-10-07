@@ -2,16 +2,51 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 16rem;
   height: 100%;
   box-shadow: 0 0 4px 0 #dcdee4;
   padding-top: 4.5rem;
-  z-index: 1;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centraliza os itens no eixo horizontal
 }
 
-.content{
+.sidebar.open {
+  width: 16rem;
+}
+
+.sidebar.closed {
+  width: 3rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  transition: all 250ms ease-in-out;
+}
+
+.menu-item i {
+  margin-right: 0.5rem;
+}
+
+.menu-item span {
+  display: none;
+  transition: all 250ms ease-in-out;
+}
+
+.sidebar.open .menu-item span {
+  display: inline;
+}
+
+.content {
   margin-left: 16rem;
   padding-top: 4.5rem;
   padding-left: 1rem;
+  transition: margin-left 250ms ease-in-out;
+}
 
+.content.closed {
+  margin-left: 3rem;
 }

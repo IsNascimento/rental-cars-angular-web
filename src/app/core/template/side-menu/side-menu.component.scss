@@ -1,3 +1,22 @@
+#sideMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+#sideMenu.open {
+  transform: translateX(0);
+}
+
+.container-fluid {
+  position: relative;
+}
+
 .sidebar-items {
   list-style: none;
   padding: 0;

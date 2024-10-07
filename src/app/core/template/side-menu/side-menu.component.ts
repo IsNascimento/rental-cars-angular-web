@@ -30,12 +30,12 @@ export class SideMenuComponent {
   @Input() items!: MenuItem[];
   @Input() isOpenLabels: string = 'open';
 
-  isOpenMenu = true;
+  isOpenMenu = false;
 
   @Output() toogle = new EventEmitter();
 
   exibirMenu() {
     this.isOpenMenu = !this.isOpenMenu;
-    this.toogle.emit(this.isOpenMenu);
+    this.toogle.emit(!this.isOpenMenu);
   }
 }

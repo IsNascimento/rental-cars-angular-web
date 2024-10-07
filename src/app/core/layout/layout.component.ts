@@ -29,32 +29,22 @@ import { FooterComponent } from '../template/footer/footer.component';
 export class LayoutComponent implements OnInit {
   items!: MenuItem[];
 
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
+  breadcumbs: MenuItem[] = [];
 
   breadcumbsHome!: MenuItem;
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Teste de Menu Alterado',
-        icon: 'fa fa-search fa-lg',
+        label: 'Alugueis',
+        icon: 'fa fa-car fa-lg',
         command: () => {},
       },
       {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
+        label: 'Relatórios',
+        icon: 'fa fa-file-o fa-lg',
         command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
-        command: () => {},
-      },
+      }
     ];
   }
 

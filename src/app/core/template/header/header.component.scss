@@ -1,7 +1,7 @@
 .layout-topbar {
-    position: fixed;
+    position: relative;
     height: 4.5rem;
-    z-index: 997;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -83,6 +83,28 @@
             margin-left: 1rem;
         }
     }
+
+    .btn-link-style {
+        background: none;
+        border: none;
+        color: #007bff; 
+        padding: 0;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      
+      .btn-link-style:hover {
+        color: #0056b3;
+      }
+
+      ::ng-deep .avatar-custom {
+        background-color: #80cbc4 !important; /* Cor clara entre azul e verde */
+        color: white !important;
+        font-weight: bold !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 }
 
 @media (max-width: 991px) {

@@ -1,6 +1,7 @@
 import { LayoutComponent } from './core/layout/layout.component';
 import { Routes } from '@angular/router';
-import { CarrosComponent } from './components/car-list/carros.component';
+import { RelatoriosComponent } from './relatorios/relatorios.component';
+import { FileUploadComponent } from './alugueis/alugueis.component';
 
 export const routes: Routes = [
     {
@@ -9,7 +10,10 @@ export const routes: Routes = [
                 path: '', loadComponent: () => import('./feature/home/home.component').then(component => component.HomeComponent)
             },
             {
-                path: 'carros', component: CarrosComponent
+                path: 'relatorios', component: RelatoriosComponent
+            },
+            {
+                path: 'alugueis', component: FileUploadComponent
             }
         ]
     }

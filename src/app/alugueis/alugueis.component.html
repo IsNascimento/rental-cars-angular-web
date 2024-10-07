@@ -1,0 +1,21 @@
+<div class="report-container">
+  <h6 class="text-dark-blue" style="font-size: 13px;">ALUGUEIS</h6>
+  <h1 class="h4 fw-bold text-primary">Alugueis</h1>
+  <p class="text-dark-blue">Preencha o filtro para realizar uma pesquisa.</p>
+
+  <div class="upload-container mt-5">
+    <h2 class="text-dark-blue">Upload de Arquivos</h2>
+    <div class="d-flex align-items-center mb-3">
+      <div class="file-upload flex-grow-1 me-3">
+        <div class="upload-box">
+          <input id="input-b3" name="input-b3[]" type="file" class="file" multiple 
+            data-show-upload="false" data-show-caption="true" 
+            data-msg-placeholder="Selecione ou arraste um arquivo *" (change)="onFileSelected($event)">
+          <small class="text-muted mt-1 d-block">Tipo: RTN<br>O tamanho do arquivo não pode ser maior que 10MB.</small>
+        </div>
+        <button class="btn btn-outline-primary no-radius ms-3">Selecionar</button>
+      </div>
+      <button class="btn btn-primary no-radius" (click)="processFile()">Processar arquivo</button>
+    </div>
+  </div>
+</div>
