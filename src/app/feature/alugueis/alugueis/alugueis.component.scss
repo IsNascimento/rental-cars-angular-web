@@ -1,0 +1,30 @@
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: smaller;
+}
+
+.custom-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+  padding: 12px;
+}
+
+.custom-table td {
+  padding: 10px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.sortable-header {
+  display: flex;
+  align-items: center;
+}
+
+.sortable-header p-sortIcon {
+  margin-left: 5px;
+}
