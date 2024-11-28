@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
+import {DividerModule} from "primeng/divider";
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     BreadcrumbModule,
     CommonModule,
+    DividerModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -33,12 +35,10 @@ export class HeaderComponent implements OnInit {
   }
 
   async getUserPrincipal() {
-    // if (await this.keyCloakService.isLoggedIn()) {
-    //   const userPrincipal = this.keyCloakService.loadUserProfile();
-    //   this.username =
-    //     (await userPrincipal).firstName + ' ' + (await userPrincipal).lastName;
-    //   this.getInitials(this.username);
-    // }
+
+      this.username = "Desafio Stefanini"
+      this.getInitials(this.username);
+
   }
 
   // Função para extrair iniciais

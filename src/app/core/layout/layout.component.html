@@ -42,8 +42,10 @@
     </p-confirmDialog>
     <p-breadcrumb
       styleClass="border-none"
-      [model]="breadcumbs"
-      [home]="breadcumbsHome"
+      [model]="breadcrumbs"
+      [home]="breadcrumbsHome"
+      class="uppercase"
+      [style]="{'font-size': '.752rem', 'font-weight': 'bold', 'padding-bottom': '.5rem'}"
     ></p-breadcrumb>
     <router-outlet></router-outlet>
   </div>

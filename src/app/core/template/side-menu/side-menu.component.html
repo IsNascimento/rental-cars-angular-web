@@ -15,6 +15,7 @@
       [attr.tabindex]="-1"
       class="p-menuitem-link align-items-center"
       [routerLink]="item.routerLink"
+      [ngClass]="{'bg-primary-500 text-white': item.routerLink === activeLink}"
       [@toogleMenuItems]="isOpenLabels"
     >
       <div class="label-menu gap-3">

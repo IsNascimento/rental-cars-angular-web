@@ -1,0 +1,64 @@
+<section>
+  <p-table [value]="rentData" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-lg" sortMode="multiple">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="dataAluguel" class="custom-header">
+          DATA
+          <p-sortIcon field="dataAluguel"/>
+        </th>
+        <th pSortableColumn="modeloCarro" class="custom-header">
+          MODELO
+          <p-sortIcon field="modeloCarro" />
+        </th>
+        <th pSortableColumn="kmCarro" class="custom-header">
+          KM
+          <p-sortIcon field="kmCarro"/>
+        </th>
+        <th pSortableColumn="nomeCliente" class="custom-header">
+          CLIENTE
+          <p-sortIcon field="nomeCliente"/>
+        </th>
+        <th pSortableColumn="telefoneCliente" class="custom-header">
+          TELEFONE
+          <p-sortIcon field="telefoneCliente"/>
+        </th>
+        <th pSortableColumn="dataDevolucao" class="custom-header">
+          DEVOLUÇÃO
+          <p-sortIcon field="dataDevolucao"/>
+        </th>
+        <th pSortableColumn="pago" class="custom-header">
+          PAGO
+          <p-sortIcon field="pago"/>
+        </th>
+        <th pSortableColumn="valor" class="custom-header">
+          VALOR
+          <p-sortIcon field="valor"/>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rent >
+      <tr>
+        <td class="custom-body">{{ formatData(rent.dataAluguel) }}</td>
+        <td class="custom-body">{{ rent.modeloCarro }}</td>
+        <td class="custom-body">{{ rent.kmCarro }}</td>
+        <td class="custom-body">{{ rent.nomeCliente }}</td>
+        <td class="custom-body">{{ rent.telefoneCliente }}</td>
+        <td class="custom-body">{{ formatData(rent.dataDevolucao) }}</td>
+        <td class="custom-body">
+          @if (rent.pago === "SIM") {
+            <p-tag severity="success" value="SIM" />
+          } @else {
+            <p-tag  severity="danger" value="NÃO" />
+          }
+        </td>
+        <td class="custom-body">{{ rent.valor }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="7" class="text-right">Soma de débitos:</td>
+        <td>{{ totalValue }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</section>

@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { TOOGLE_SIDEBAR } from '../../layout/layout.animation';
-import { FormFieldComponent } from '../../../shared/components/form-field/form-field.component';
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-side-menu',
@@ -15,7 +15,6 @@ import { FormFieldComponent } from '../../../shared/components/form-field/form-f
   imports: [
     SidebarModule,
     MenuModule,
-    FormFieldComponent,
     ButtonModule,
     PanelMenuModule,
     CommonModule,
@@ -30,9 +29,18 @@ export class SideMenuComponent {
   @Input() items!: MenuItem[];
   @Input() isOpenLabels: string = 'open';
 
+  activeLink: string = '';
   isOpenMenu = true;
 
   @Output() toogle = new EventEmitter();
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeLink = event.url;
+      }
+    });
+  }
 
   exibirMenu() {
     this.isOpenMenu = !this.isOpenMenu;

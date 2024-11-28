@@ -1,0 +1,51 @@
+<section>
+  <h2 [ngStyle]="{color: 'var(--primary-500)'}" class="text-5xl m-0">
+    Relatórios
+  </h2>
+  <h3 [ngStyle]="{color: 'var(--primary-800)'}" class="mt-2 mb-0">
+    Preencha o filtro para realizar uma pesquisa.
+  </h3>
+
+  <p-divider/>
+
+  <div class="flex gap-4 mt-5 w-full">
+
+    <form class="flex gap-4 w-full align-content-center h-auto" [formGroup]="filterForm">
+      <p-floatLabel class="w-3">
+        <p-calendar
+          formControlName="data"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          pInputText
+          class="border-0 pl-2"
+          styleClass="w-full"
+          id="data"
+        />
+        <label for="data" class="ml-2">Data do aluguel</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="w-3">
+        <p-dropdown
+          formControlName="carModel"
+          [options]="carModels"
+          optionLabel="name"
+          optionValue="code"
+          id="carModel"
+          pInputText
+          class="border-0 pl-2"
+          styleClass="w-full"
+          placeholder=" "
+
+        />
+        <label for="carModel" class="ml-2">Modelo do carro</label>
+      </p-floatLabel>
+
+      <p-button
+        icon="fa fa-search"
+        label="Buscar"
+        [disabled]="filterForm.invalid"
+      />
+    </form>
+
+  </div>
+</section>

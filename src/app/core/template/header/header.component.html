@@ -1,7 +1,7 @@
 <div class="layout-topbar align-content-center">
   <div class="layout-topbar-top">
     <div class="layout-topbar-logo gap-2">
-      <span>LOGO</span>
+
     </div>
 
     <div class="flex align-items-center gap-2">
@@ -11,7 +11,13 @@
         styleClass="mr-2"
         size="normal"
         shape="circle"
+        [style]="{ 'background-color': '#2DB3AE', 'color': '#ffffff', 'font-weight': 'bold' }"
       ></p-avatar>
+
+      <p-divider layout="vertical"/>
+
+      <p-button label="Sair" [text]="true"  />
     </div>
+
   </div>
 </div>

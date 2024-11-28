@@ -1,10 +1,10 @@
-import { RouterOutlet } from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import { TOOGLE_SIDEBAR } from './layout.animation';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { HeaderComponent } from '../template/header/header.component';
 import { SideMenuComponent } from '../template/side-menu/side-menu.component';
 import { FooterComponent } from '../template/footer/footer.component';
@@ -27,38 +27,40 @@ import { FooterComponent } from '../template/footer/footer.component';
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent implements OnInit {
+  private _router = inject(Router);
+
   items!: MenuItem[];
-
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
-
-  breadcumbsHome!: MenuItem;
+  breadcrumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
+  breadcrumbsHome!: MenuItem;
+  isOpenMenu: boolean = true;
+  activeLink: string = '';
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Item Menu 1',
-        icon: 'fa fa-search fa-lg',
-        command: () => {},
+        label: 'Alugueis',
+        icon: 'fa fa-car fa-lg',
+        routerLink: '/rents',
+        command: () => this.changeBreadcrumb('ALUGUEIS'),
       },
       {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
-        command: () => {},
+        label: 'Relatórios',
+        icon: 'fa fa-file fa-lg',
+        routerLink: '/reports',
+        command: () => this.changeBreadcrumb('RELATÓRIOS'),
       },
     ];
+
+    this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeLink = event.url;
+      }
+    });
   }
 
-  isOpenMenu: boolean = true;
+  private changeBreadcrumb(breadcrumbLabel: string) {
+      this.breadcrumbs = [{ label: breadcrumbLabel }];
+  }
 
   exibirMenu(value: boolean) {
     this.isOpenMenu = value;
