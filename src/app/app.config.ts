@@ -1,16 +1,19 @@
-import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 // import { KeycloakService } from 'keycloak-angular';
 // import { AuthGuard } from './core/auth/auth.guard';
-import { environment } from '../environments/environment';
+import { provideHttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
+    provideHttpClient(),
+    MessageService
     // AuthGuard,
     // {
     //   provide: APP_INITIALIZER,
