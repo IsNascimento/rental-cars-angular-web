@@ -1,0 +1,12 @@
+<div class="field p-fluid">
+  <label for="model" class="title p-mb-2">Modelo do carro</label>
+  <p-dropdown
+    id="model"
+    [options]="options"
+    [(ngModel)]="selectedOption"
+    placeholder="Todos"
+    optionLabel="label"
+    (onChange)="onSelectChange()"
+  >
+  </p-dropdown>
+</div>

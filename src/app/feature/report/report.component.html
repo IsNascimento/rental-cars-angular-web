@@ -1,0 +1,18 @@
+<section>
+  <app-title-content
+    class="flex flex-column p-4"
+    [title]="'Relatórios'"
+    [subtitle]="'Preencha o filtro para realizar uma pesquisa'"
+  ></app-title-content>
+  <hr class="cabecalho" />
+</section>
+<div class="flex flex-column gap-3 p-4">
+  <div class="flex align-items-center gap-3">
+    <app-date-filter [date]="startDate" (dateChange)="onStartDateChange($event)" class="mr-2"></app-date-filter>
+    <app-select-filter [options]="models" (selectionChange)="onModelChange($event)" class="mr-2"></app-select-filter>
+    <button pButton type="button" label="Buscar" icon="pi pi-search" (click)="onSearch()" class="btn-buscar p-button-outlined"></button>
+  </div>
+  <div class="flex flex-column">
+    <app-report-table [filteredReports]="filteredReports"></app-report-table>
+  </div>
+</div>

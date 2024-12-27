@@ -1,0 +1,43 @@
+<p-table [value]="filteredReports" [paginator]="true" [rows]="10" dataKey="id">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="dataAluguel">Data <p-sortIcon field="dataAluguel"></p-sortIcon></th>
+      <th pSortableColumn="modeloCarro">Modelo <p-sortIcon field="modeloCarro"></p-sortIcon></th>
+      <th pSortableColumn="km">KM <p-sortIcon field="km"></p-sortIcon></th>
+      <th pSortableColumn="nomeCliente">Cliente <p-sortIcon field="nomeCliente"></p-sortIcon></th>
+      <th pSortableColumn="telefoneCliente">Telefone <p-sortIcon field="telefoneCliente"></p-sortIcon></th>
+      <th pSortableColumn="dataDevolucao">Devolução <p-sortIcon field="dataDevolucao"></p-sortIcon></th>
+      <th pSortableColumn="statusPagamento">Pago <p-sortIcon field="statusPagamento"></p-sortIcon></th>
+      <th pSortableColumn="valor">Valor <p-sortIcon field="valor"></p-sortIcon></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-report>
+    <tr>
+      <td>{{ report.dataAluguel | date : 'dd/MM/yyyy' }}</td>
+      <td>{{ report.modeloCarro }}</td>
+      <td>{{ report.km }}</td>
+      <td>{{ report.nomeCliente }}</td>
+      <td>
+        <p-inputMask
+          [mask]="getPhoneMask(report.telefoneCliente)"
+          [unmask]="true"
+          styleClass="border-none"
+          [(ngModel)]="report.telefoneCliente"
+          [disabled]="true">
+        </p-inputMask>
+      </td>
+      <td>
+        <p-tag [value]="report.dataDevolucao ? 'Sim' : 'Não'" [severity]="report.dataDevolucao ? 'success' : 'danger'"></p-tag>
+      </td>
+      <td>
+        <p-tag [value]="report.statusPagamento === 'SIM' ? 'Sim' : 'Não'" [severity]="report.statusPagamento === 'SIM' ? 'success' : 'danger'"></p-tag>
+      </td>
+      <td>{{ report.valor | currency : 'BRL' }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex justify-content-end">
+      Total: {{ totalValue | currency : 'BRL' }}
+    </div>
+  </ng-template>
+</p-table>

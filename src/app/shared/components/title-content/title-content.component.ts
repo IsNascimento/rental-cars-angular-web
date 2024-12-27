@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TitleContentComponent {
   @Input() title!: string
+  @Input() subtitle!: string
 }

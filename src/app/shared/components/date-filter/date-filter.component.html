@@ -1,0 +1,11 @@
+<div class="field p-fluid">
+  <label class="title p-text-bold p-mb-2">Data do aluguel</label>
+  <p-calendar
+    [(ngModel)]="date"
+    inputId="rentalDate"
+    [showIcon]="true"
+    [dateFormat]="'dd/mm/yy'"
+    (onSelect)="onDateSelected($event)"
+  >
+  </p-calendar>
+</div>

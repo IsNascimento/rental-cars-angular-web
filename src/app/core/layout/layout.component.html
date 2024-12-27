@@ -40,11 +40,7 @@
         </div>
       </ng-template>
     </p-confirmDialog>
-    <p-breadcrumb
-      styleClass="border-none"
-      [model]="breadcumbs"
-      [home]="breadcumbsHome"
-    ></p-breadcrumb>
+    <p-breadcrumb class="flex flex-column p-2" styleClass="border-none" [model]="breadcrumbs" [home]="breadcumbsHome"></p-breadcrumb>
     <router-outlet></router-outlet>
   </div>
 </main>
