@@ -34,6 +34,10 @@ export class SideMenuComponent {
 
   @Output() toogle = new EventEmitter();
 
+  ngAfterViewInit() {
+    this.exibirMenu();
+  }  
+
   exibirMenu() {
     this.isOpenMenu = !this.isOpenMenu;
     this.toogle.emit(this.isOpenMenu);

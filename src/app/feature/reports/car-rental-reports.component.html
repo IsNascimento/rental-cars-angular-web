@@ -1,0 +1,337 @@
+<div class="report-container">
+  <div class="header-section">
+    <h2>Relatórios</h2>
+    <p class="subtitle">Preencha o filtro para realizar uma pesquisa.</p>
+  </div>
+
+  <div class="filters">
+    <!-- Date Filter -->
+    <div class="filter-group" #calendarContainer>
+      <label for="rentalDate">Data do aluguel</label>
+      <div class="date-input">
+        <input 
+          type="text" 
+          id="rentalDate" 
+          [(ngModel)]="rentalDate" 
+          (click)="toggleCalendar($event)" 
+        />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="calendar-icon"
+          (click)="toggleCalendar($event)"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+        <!-- Calendar Dropdown -->
+        <div *ngIf="showCalendar" class="calendar-dropdown">
+          <div class="calendar-header">Setembro 2024</div>
+          <div class="calendar-weekdays">
+            <div *ngFor="let day of weekdays" class="weekday">{{ day }}</div>
+          </div>
+          <div class="calendar-days">
+            <div 
+              *ngFor="let day of calendarDays" 
+              class="calendar-day"
+              (click)="selectDate(day)"
+            >
+              {{ day }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Car Model Filter -->
+    <div class="filter-group" #modelDropdownContainer>
+      <label for="carModel">Modelo do carro</label>
+      <div class="select-input">
+        <input 
+          type="text" 
+          id="carModel" 
+          [(ngModel)]="carModel" 
+          readonly
+          (click)="toggleModelDropdown($event)" 
+        />
+        <div class="select-icons">
+          <!-- X icon to clear -->
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#6C6C6C" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="close-icon"
+            (click)="clearModel($event)"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          
+          <!-- Dropdown arrow -->
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#6C6C6C" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="chevron-icon"
+            (click)="toggleModelDropdown($event)"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        
+        <!-- Model Dropdown Menu -->
+        <div *ngIf="showModelDropdown" class="model-dropdown">
+          <div 
+            *ngFor="let model of carModels" 
+            class="model-option"
+            (click)="selectModel(model)"
+          >
+            {{ model }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Button -->
+    <button class="search-btn" (click)="search()">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="18" 
+        height="18" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        class="search-icon"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      Buscar
+    </button>
+  </div>
+
+  <!-- Data Table -->
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <!-- Table Headers -->
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('date') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('date') && sortDirection === 'asc'"
+            (click)="sortTable('date')"
+          >
+            DATA
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('model') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('model') && sortDirection === 'asc'"
+            (click)="sortTable('model')"
+          >
+            MODELO
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('km') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('km') && sortDirection === 'asc'"
+            (click)="sortTable('km')"
+          >
+            KM
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('client') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('client') && sortDirection === 'asc'"
+            (click)="sortTable('client')"
+          >
+            CLIENTE
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('phone') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('phone') && sortDirection === 'asc'"
+            (click)="sortTable('phone')"
+          >
+            TELEFONE
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('returnDate') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('returnDate') && sortDirection === 'asc'"
+            (click)="sortTable('returnDate')"
+          >
+            DEVOLUÇÃO
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('paid') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('paid') && sortDirection === 'asc'"
+            (click)="sortTable('paid')"
+          >
+            PAGO
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+          <th 
+            class="sortable" 
+            [class.sortable-desc]="isSortedColumn('value') && sortDirection === 'desc'"
+            [class.sortable-asc]="isSortedColumn('value') && sortDirection === 'asc'"
+            (click)="sortTable('value')"
+          >
+            VALOR
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of rentalReports">
+          <td>{{ report.date }}</td>
+          <td>{{ report.model }}</td>
+          <td>{{ report.km | number }}</td>
+          <td>{{ report.client }}</td>
+          <td>{{ report.phone }}</td>
+          <td>{{ report.returnDate }}</td>
+          <td>
+            <span [ngClass]="report.paid ? 'paid-tag' : 'unpaid-tag'">
+              {{ report.paid ? 'SIM' : 'NÃO' }}
+            </span>
+          </td>
+          <td>R$ {{ formatCurrency(report.value) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Total Debt Row -->
+  <div class="total-row">
+    <span>Soma de débitos: R$ {{ formatCurrency(totalDebt) }}</span>
+  </div>
+</div>

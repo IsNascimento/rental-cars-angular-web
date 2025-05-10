@@ -1,0 +1,84 @@
+<div class="upload-container">
+  <div class="header-section">
+    <h2 style="margin-top: 0;">Alugueis</h2>
+    <p class="subtitle">Envie seu arquivo.</p>
+  </div>
+  
+  <div class="divider"></div>
+  
+  <div class="section-title">Upload de arquivos</div>
+  
+  <div class="upload-area" 
+       (dragover)="onDragOver($event)" 
+       (dragleave)="onDragLeave($event)" 
+       (drop)="onFileDrop($event)">
+    
+    @if (!selectedFile) {
+      <div class="upload-placeholder" (click)="triggerFileInput()">
+        <div class="upload-icon">
+          <svg fill="#4071e6" height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 222.796 222.796" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M222.796,125.509c0,27.92-22.714,50.635-50.634,50.635h-52.79v-58.718l14.197,14.197c1.464,1.464,3.384,2.197,5.303,2.197 s3.839-0.732,5.303-2.197c2.929-2.929,2.929-7.678,0-10.606l-27.474-27.474c-2.929-2.929-7.678-2.929-10.606,0l-27.474,27.474 c-2.929,2.929-2.929,7.678,0,10.606c1.464,1.464,3.384,2.197,5.303,2.197s3.839-0.732,5.303-2.197l15.145-15.145v59.666H38.925 C17.461,176.144,0,158.682,0,137.219c0-20.394,15.766-37.176,35.75-38.796c2.713-13.326,9.575-25.493,19.737-34.796 C67.444,52.68,82.962,46.652,99.184,46.652c22.805,0,43.839,12.091,55.458,31.349c5.586-2.058,11.53-3.126,17.519-3.126 C200.082,74.875,222.796,97.589,222.796,125.509z"></path>
+          </g></svg>  
+         </div>
+        <div class="upload-text" >
+          <p>Selecione ou arraste um arquivo <span class="required">*</span></p>
+          <p class="file-info">Tipo: {{ acceptedFileType }}</p>
+          <p class="file-info">O tamanho do arquivo não pode ser maior que {{ maxFileSize }}MB.</p>
+        </div>
+      </div>
+    } @else if (selectedFile && !fileUploaded) {
+      <div class="selected-file">
+        <div class="file-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="80" height="80" fill="#4071e6">
+            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"></path>
+            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+          </svg>
+        </div>
+        <div class="file-details">
+          <div class="file-name">{{ fileName }}</div>
+          <div class="progress-container">
+            <div class="progress-bar" [style.width.%]="uploadProgress"></div>
+          </div>
+        </div>
+        <div class="file-size">{{ fileSize }}</div>
+      </div>
+    } @else {
+      <div class="uploaded-file">
+        <div class="file-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="80" height="80" fill="#4071e6">
+            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"></path>
+            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+          </svg>
+        </div>
+        <div class="file-details">
+          <div class="file-name">{{ fileName }}</div>
+        </div>
+        <div class="file-size">{{ fileSize }}</div>
+        <a class="btn" (click)="removeFile($event)">
+          <svg fill="red" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg" width="30" height="30"> 
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+              <path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path>
+            </g>
+          </svg>
+        </a>
+      </div>
+    }
+    
+    <input
+      type="file"
+      id="fileInput"
+      (change)="onFileSelected($event)"
+      style="display: none"
+    />
+  </div>
+  
+  <div class="action-buttons">
+    <button class="btn-select" (click)="triggerFileInput()">Selecionar</button>
+    <button class="btn-upload" [disabled]="!selectedFile || uploadInProgress || fileUploaded" (click)="uploadFile()">
+      Processar arquivo
+    </button>
+  </div>
+</div>

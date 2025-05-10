@@ -1,3 +1,24 @@
+.avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #20c997; // similar to your screenshot
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .logout-btn {
+    border: none;
+    background: none;
+    color: #4169e1;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
 .layout-topbar {
     position: fixed;
     height: 4.5rem;

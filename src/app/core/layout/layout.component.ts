@@ -29,32 +29,30 @@ import { FooterComponent } from '../template/footer/footer.component';
 export class LayoutComponent implements OnInit {
   items!: MenuItem[];
 
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
+  tituloVariavel: string = '';
+
+  breadcumbs: MenuItem[] = [{ label: this.tituloVariavel }];
 
   breadcumbsHome!: MenuItem;
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Item Menu 1',
-        icon: 'fa fa-search fa-lg',
-        command: () => {},
+        label: 'Alugueis',
+        icon: 'fa fa-car fa-lg',
+        routerLink: '/alugueis',
+        command: () => {
+          this.updateBreadcrumbs('ALUGUEIS');
+        },
       },
       {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
-        command: () => {},
-      },
+        label: 'Relatórios',
+        icon: 'fa fa-file fa-lg',
+        routerLink: '/relatorios',
+        command: () => {
+          this.updateBreadcrumbs('RELATÓRIOS');
+        },
+      }
     ];
   }
 
@@ -66,5 +64,9 @@ export class LayoutComponent implements OnInit {
 
   hasOpen(): string {
     return this.isOpenMenu ? 'open' : 'closed';
+  }
+
+  updateBreadcrumbs(label: string) {
+    this.breadcumbs = [{ label }];
   }
 }

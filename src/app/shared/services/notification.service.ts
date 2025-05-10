@@ -46,4 +46,13 @@ export class NotificationService {
       detail: message,
     });
   }
+
+public cleanSuccessMessage(title: string, message: string) {
+  this.messageService.add({
+    key: 'app',
+    summary: title,
+    detail: message,
+    styleClass: 'clean-success-toast'
+  });
+}
 }
