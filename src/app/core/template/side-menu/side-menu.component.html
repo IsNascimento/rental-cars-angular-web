@@ -10,13 +10,8 @@
 
 <p-menu [model]="items" styleClass="border-none w-full h-full pt-3">
   <ng-template pTemplate="item" let-item>
-    <a
-      *ngIf="!item?.url"
-      [attr.tabindex]="-1"
-      class="p-menuitem-link align-items-center"
-      [routerLink]="item.routerLink"
-      [@toogleMenuItems]="isOpenLabels"
-    >
+    <a *ngIf="!item?.url" [attr.tabindex]="-1" class="p-menuitem-link align-items-center" [routerLink]="item.routerLink"
+      routerLinkActive="active-menu-item" [@toogleMenuItems]="isOpenLabels">
       <div class="label-menu gap-3">
         <div class="icon-width"><span [class]="item.icon"></span></div>
         <div>

@@ -1,17 +1,16 @@
 <div class="layout-topbar align-content-center">
-  <div class="layout-topbar-top">
-    <div class="layout-topbar-logo gap-2">
-      <span>LOGO</span>
-    </div>
-
+  <div class="layout-topbar-top flex align-items-center">
     <div class="flex align-items-center gap-2">
       <span>{{ username }}</span>
       <p-avatar
         [label]="initialsName"
         styleClass="mr-2"
+        className="avatar"
         size="normal"
         shape="circle"
       ></p-avatar>
     </div>
+    <p-divider layout="vertical"></p-divider>
+    <p-button label="Sair" [text]="true" severity="info" />
   </div>
 </div>

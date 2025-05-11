@@ -15,12 +15,11 @@ import { FormFieldComponent } from '../../../shared/components/form-field/form-f
   imports: [
     SidebarModule,
     MenuModule,
-    FormFieldComponent,
     ButtonModule,
     PanelMenuModule,
     CommonModule,
-    InputTextModule,
-  ],
+    InputTextModule
+],
   animations: [TOOGLE_SIDEBAR],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss',

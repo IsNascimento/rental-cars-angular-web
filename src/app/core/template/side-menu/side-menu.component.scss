@@ -33,13 +33,19 @@
   white-space: nowrap;
 }
 
-.icon-width{
+.icon-width {
   width: 1.25rem;
 }
 
-.searchInput{
+.searchInput {
   border-top: 0;
   border-left: 0;
   border-right: 0;
   border-bottom: 1px solid #4264CD;
+}
+
+.active-menu-item {
+  background-color: #4264CD;
+  color: white;
+  font-weight: bold;
 }
