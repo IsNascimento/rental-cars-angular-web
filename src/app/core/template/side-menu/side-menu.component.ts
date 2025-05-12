@@ -7,7 +7,6 @@ import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { TOOGLE_SIDEBAR } from '../../layout/layout.animation';
-import { FormFieldComponent } from '../../../shared/components/form-field/form-field.component';
 
 @Component({
   selector: 'app-side-menu',

@@ -17,7 +17,7 @@ export const routes: Routes = [
           import('./feature/alugueis/alugueis.component').then(
             (m) => m.AlugueisComponent
           ),
-        data: { breadcrumb: 'Aluguéis' },
+        data: { breadcrumb: 'Alugueis' },
       },
       {
         path: 'relatorios',

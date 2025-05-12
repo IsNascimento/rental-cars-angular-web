@@ -36,7 +36,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Aluguéis',
+        label: 'Alugueis',
         icon: 'fa fa-car fa-lg',
         routerLink: ['/alugueis'],
       },
