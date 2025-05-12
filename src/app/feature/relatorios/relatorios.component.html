@@ -1,1 +1,70 @@
-<p>relatorios works!</p>
+<div class="container">
+  <app-title-content title="Relatórios"></app-title-content>
+  <span class="subtitle">Preencha o filtro para realizar uma pesquisa.</span>
+  <p-divider></p-divider>
+
+  <div class="row">
+    <div class="form-group calendar-wrapper">
+      <label class="filtro-label" for="dataAluguel">Data de Aluguel</label>
+      <div class="calendar-container equal-width">
+        <p-calendar id="dataAluguel" [(ngModel)]="dataAluguel" dateFormat="dd/mm/yy" inputId="dataAluguel"></p-calendar>
+        <i class="fa fa-calendar custom-calendar-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group equal-width">
+      <label class="filtro-label" for="modeloCarro">Modelo do Carro</label>
+      <p-dropdown id="modeloCarros" [options]="modeloCarros" [(ngModel)]="modeloCarroSelecionado"
+        placeholder="Selecione" inputId="modeloCarros"></p-dropdown>
+    </div>
+
+    <div class="form-group button-group">
+      <label>&nbsp;</label>
+      <button pButton type="button" label="Buscar" icon="pi pi-search" (click)="onSearch()"></button>
+    </div>
+  </div>
+
+  <div class="tabela-wrapper">
+    <p-table [value]="alugueis" [tableStyle]="{ 'min-width': '50rem', 'font-size': '0.9rem' }" class="custom-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="dataAluguel">DATA<p-sortIcon field="dataAluguel" /></th>
+          <th pSortableColumn="modeloCarro">MODELO<p-sortIcon field="modeloCarro" /></th>
+          <th pSortableColumn="km">KM<p-sortIcon field="km" /></th>
+          <th pSortableColumn="nomeCliente">CLIENTE<p-sortIcon field="nomeCliente" /></th>
+          <th pSortableColumn="telefone">TELEFONE<p-sortIcon field="telefone" /></th>
+          <th pSortableColumn="dataDevolucao">DEVOLUÇÃO<p-sortIcon field="dataDevolucao" /></th>
+          <th pSortableColumn="pago">PAGO<p-sortIcon field="pago" /></th>
+          <th pSortableColumn="valor">VALOR<p-sortIcon field="valor" />
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-aluguel>
+        <tr>
+          <td>{{ aluguel.dataAluguel | date:'dd/MM/yyyy' }}</td>
+          <td>{{ aluguel.modeloCarro.toUpperCase() }}</td>
+          <td>{{ aluguel.km | number }}</td>
+          <td>{{ aluguel.nomeCliente }}</td>
+          <td>{{ aluguel.telefone }}</td>
+          <td>{{ aluguel.dataDevolucao | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span [ngClass]="{
+              'p-tag': true,
+              'p-tag-success': aluguel.pago === 'SIM',
+              'p-tag-danger': aluguel.pago === 'NAO'
+            }">
+              {{ aluguel.pago }}
+            </span>
+          </td>
+          <td>{{ aluguel.valor | currency:'BRL':'symbol' }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-end mr-4">
+          Soma de débitos: {{ valornaoPago | currency:'BRL':'symbol' }}
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>
