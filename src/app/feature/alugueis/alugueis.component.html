@@ -1,1 +1,58 @@
-<p>alugueis works!</p>
+<div class="content">
+  <app-title-content title="Alugueis"></app-title-content>
+
+  <span class="subtitle">Importe um arquivo .rtn com dados de alugueis.</span>
+
+  <p-divider />
+  <label class="label-upload">Upload de Arquivo</label>
+
+  <section class="upload-section">
+
+    <div class="flex align-content-center justify-content-between flex-wrap pr-5">
+      <p-fileUpload #fileupload name="rtnfile" [customUpload]="true" (uploadHandler)="onTemplatedUpload()" accept=".rtn"
+        [maxFileSize]="10000000" [showUploadButton]="false" [showCancelButton]="false" [multiple]="false"
+        chooseLabel="Selecionar" (onSelect)="onSelectedFiles($event)">
+
+        <ng-template pTemplate="header" let-chooseCallback="chooseCallback" let-clearCallback="clearCallback"
+          let-uploadCallback="uploadCallback">
+          <div class="upload-header-container">
+            <!-- Vazio porque você personaliza tudo -->
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="content" let-chooseCallback="chooseCallback">
+          <div class="upload-header-container">
+            <ng-container *ngIf="!hasFile; else showFileList">
+              <div class="upload-info">
+                <i class="fa fa-cloud-upload upload-icon"></i>
+                <div class="upload-texts">
+                  <span class="main-text">Selecione ou arraste um arquivo *</span>
+                  <small class="sub-text">Tipo: RTN.</small>
+                  <small class="sub-text">O tamanho do arquivo não pode ser maior que 10MB.</small>
+                </div>
+                <div class="upload-action">
+                  <p-button label="Selecionar" class="p-button-text" (onClick)="choose($event, chooseCallback)">
+                  </p-button>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-template #showFileList>
+              <div class="file-preview">
+                <div class="file-name">{{ selectedFile?.name }}</div>
+                <p-progressBar [value]="progress"></p-progressBar>
+                <button type="button" pButton icon="pi pi-trash" class="p-button-text p-button-danger"
+                  (click)="clearFile()">
+                </button>
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </p-fileUpload>
+
+      <div class="flex flex-column justify-content-center process-button">
+        <button pButton label="Processar arquivo" (click)="onTemplatedUpload()"></button>
+      </div>
+    </div>
+    <p-toast></p-toast>
+  </section>
