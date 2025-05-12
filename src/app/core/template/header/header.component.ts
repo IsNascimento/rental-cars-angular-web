@@ -4,6 +4,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
+import { DividerModule } from 'primeng/divider';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     BreadcrumbModule,
     CommonModule,
+    DividerModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -39,6 +41,8 @@ export class HeaderComponent implements OnInit {
     //     (await userPrincipal).firstName + ' ' + (await userPrincipal).lastName;
     //   this.getInitials(this.username);
     // }
+    this.username = 'Sandra Rosa Madalena';
+    this.getInitials(this.username);
   }
 
   // Função para extrair iniciais

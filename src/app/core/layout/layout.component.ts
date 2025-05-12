@@ -1,4 +1,4 @@
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { TOOGLE_SIDEBAR } from './layout.animation';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../template/header/header.component';
 import { SideMenuComponent } from '../template/side-menu/side-menu.component';
 import { FooterComponent } from '../template/footer/footer.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -28,34 +29,44 @@ import { FooterComponent } from '../template/footer/footer.component';
 })
 export class LayoutComponent implements OnInit {
   items!: MenuItem[];
+  breadcumbs: MenuItem[] = [];
 
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
-
-  breadcumbsHome!: MenuItem;
+  constructor(private router: Router, private route: ActivatedRoute){}
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Item Menu 1',
-        icon: 'fa fa-search fa-lg',
-        command: () => {},
+        label: 'Alugueis',
+        icon: 'fa fa-car fa-lg',
+        routerLink: ['/alugueis'],
       },
       {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
-        command: () => {},
+        label: 'Relatórios',
+        icon: 'fa fa-file fa-lg',
+        routerLink: ['/relatorios'],
       },
     ];
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.updateBreadcrumb();
+    });
+
+    this.updateBreadcrumb();
+  }
+
+  updateBreadcrumb(): void {
+    const child = this.getChild(this.route);
+    const label = child.snapshot.data['breadcrumb'];
+    this.breadcumbs = label ? [{ label }] : [{ label: 'Página Inicial' }];
+  }
+
+  getChild(route: ActivatedRoute): ActivatedRoute {
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    return route;
   }
 
   isOpenMenu: boolean = true;

@@ -1,12 +1,13 @@
 .sidebar {
   position: fixed;
+  background: white;
   left: 0;
-  top: 0;
+  top: -4.5rem;
   width: 16rem;
   height: 100%;
   box-shadow: 0 0 4px 0 #dcdee4;
   padding-top: 4.5rem;
-  z-index: 1;
+  z-index: 998;
 }
 
 .content{

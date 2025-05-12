@@ -2,11 +2,31 @@ import { LayoutComponent } from './core/layout/layout.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    {
-        path: '', component: LayoutComponent, children: [
-            {
-                path: '', loadComponent: () => import('./feature/home/home.component').then(component => component.HomeComponent)
-            }
-        ]
-    }
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'relatorios',
+        pathMatch: 'full',
+      },
+      {
+        path: 'alugueis',
+        loadComponent: () =>
+          import('./feature/alugueis/alugueis.component').then(
+            (m) => m.AlugueisComponent
+          ),
+        data: { breadcrumb: 'Alugueis' },
+      },
+      {
+        path: 'relatorios',
+        loadComponent: () =>
+          import('./feature/relatorios/relatorios.component').then(
+            (m) => m.RelatoriosComponent
+          ),
+        data: { breadcrumb: 'Relatórios' },
+      },
+    ],
+  },
 ];

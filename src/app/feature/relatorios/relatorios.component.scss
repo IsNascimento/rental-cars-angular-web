@@ -1,0 +1,127 @@
+@import "primeicons/primeicons.css";
+
+.container {
+  padding: 0 1rem 1rem 1rem;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-group {
+  justify-content: flex-end;
+}
+
+.calendar-wrapper {
+  position: relative;
+}
+
+.calendar-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.custom-calendar-icon {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  color: #4264CD;
+  background-color: white;
+  pointer-events: none;
+  padding-left: 0.5rem;
+}
+
+.tabela-wrapper {
+  margin-top: 2rem;
+}
+
+::ng-deep .p-inputtext,
+::ng-deep .p-dropdown,
+::ng-deep .p-calendar input {
+  width: 200px;
+}
+
+::ng-deep .p-inputtext,
+::ng-deep .p-dropdown,
+::ng-deep .p-button,
+::ng-deep .p-calendar input {
+  border-radius: 0;
+}
+
+::ng-deep .p-divider {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.custom-table .p-table-thead>tr>th {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.p-table .p-table-thead>tr>th {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
+
+::ng-deep .p-table .p-table-thead>tr>th {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0.75rem;
+}
+
+::ng-deep .p-tag-success {
+  background-color: #28a745;
+  color: white;
+}
+
+::ng-deep .p-tag-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+::ng-deep .p-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: px;
+  font-weight: bold;
+}
+
+::ng-deep .p-table td {
+  padding: 0.5rem;
+}
+
+::ng-deep .p-table .p-column-title {
+  padding-right: 1rem;
+}
+
+::ng-deep .p-table .p-tag {
+  padding: 0.25rem 0.5rem;
+}
+
+.subtitle {
+  color: #022591;
+  font-weight: 600;
+}
+
+.filtro-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: #022591;
+}
