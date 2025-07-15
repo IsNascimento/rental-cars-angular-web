@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup  } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogService } from '../../shared/services/confirm-dialog.service';
+import { RouterOutlet } from '@angular/router';
 
 interface City {
   name: string;
@@ -12,7 +13,7 @@ interface City {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [ButtonModule, RouterOutlet],
   providers: [NotificationService, ConfirmDialogService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

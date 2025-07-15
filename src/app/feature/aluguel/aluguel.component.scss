@@ -1,0 +1,55 @@
+html,
+body,
+#app {
+    height: 100%;
+    margin: 0;
+    font-family: var(--font-family);
+}
+
+.p-h-100 {
+    height: 100vh;
+}
+
+.p-border-dashed {
+    border: 2px dashed var(--surface-d);
+}
+
+.p-border-round {
+    border-radius: var(--border-radius);
+}
+
+:host ::ng-deep .p-fileupload-buttonbar {
+    display: none !important;
+}
+
+:host ::ng-deep .p-fileupload-content {
+    border: none !important;
+    padding: 0 !important;
+}
+
+:host ::ng-deep .p-progressbar {
+    display: none !important;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 98%;
+}
+
+:host ::ng-deep .p-fileupload-files {
+    margin-top: 3%;
+}
+
+.upload-content-rtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3%;
+    padding: 10px;
+}
+
+.upload-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}

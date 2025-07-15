@@ -1,0 +1,38 @@
+<div class="p-flex-grow-1 p-p-4">
+    <h1 class="p-mb-2" style="color: #4264CD;">Alugueis</h1>
+    <h3 class="p-text-secondary p-mb-5" style="font-weight: bold;">Upload de arquivos</h3>
+
+    <div class="p-field">
+        <div class="upload-container">
+            <div class="p-d-flex p-jc-center p-ai-center p-p-5 p-border-dashed p-border-round"
+                style="border-width: 2px; min-height: 150px; width: 80%;">
+                <p-fileUpload #fileUploadRef name="myfile[]" [customUpload]="true" (onSelect)="onUpload($event)"
+                    (onRemove)="onRemove($event)" [multiple]="false" accept=".rtn" [maxFileSize]="10000000"
+                    chooseLabel="Selecionar" uploadLabel="Processar arquivo" cancelLabel="Cancelar"
+                    [showUploadButton]="false" [showCancelButton]="false" [auto]="false">
+
+                    <ng-template pTemplate="content">
+                        <div *ngIf="!selectedFile" class="p-d-flex p-flex-column p-ai-center upload-content-rtn">
+                            <i class="fa fa-cloud-upload p-text-secondary" style="font-size: 4rem;color: #4264cd;"></i>
+                            <div class="p-mt-3 p-text-center" style="text-align: center;">
+                                <span class="p-text-bold">Selecione ou arraste um arquivo <span
+                                        style="color: red;">*</span></span><br>
+                                <small class="p-text-secondary">Tipo: RTN.</small><br>
+                                <small class="p-text-secondary">O tamanho do arquivo não pode ser maior que
+                                    10MB.</small>
+                            </div>
+                            <p-button label="Selecionar" styleClass="p-mb-2" (click)="fileUploadRef.choose()"></p-button>
+                        </div>
+
+                    </ng-template>
+                    
+                    
+                </p-fileUpload>
+
+            </div>
+            <p-button label="Processar arquivo" (click)="processarArquivo()"></p-button>
+        </div>
+
+    </div>
+
+</div>

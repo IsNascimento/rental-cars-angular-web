@@ -1,0 +1,104 @@
+<div class="relatorio-container">
+    <h1 class="p-mb-2" style="color: #4264CD;">Relatórios</h1>
+    <p class="p-text-secondary p-mb-5" style="font-weight: bold;">Preencha o filtro para realizar uma pesquisa.</p>
+
+    <div class="filters-container">
+        <div>
+            <p-floatLabel>
+                <p-calendar [(ngModel)]="dataAluguel" inputId="dataAluguel" dateFormat="dd/mm/yy"></p-calendar>
+                <label for="dataAluguel">Data do aluguel</label>
+            </p-floatLabel>
+        </div>
+
+        <div>
+            <p-floatLabel>
+                <p-dropdown [style]="{'width':'250px'}" [(ngModel)]="modeloCarroSelecionado" [options]="modelosCarro"
+                    optionLabel="label" placeholder="Todos" [showClear]="true"></p-dropdown>
+                <label for="modeloCarro">Modelo do carro</label>
+            </p-floatLabel>
+        </div>
+
+        <div class="p-col-12 p-md-2">
+            <p-button label="Buscar" icon="pi pi-search" (onClick)="pesquisar()"></p-button>
+        </div>
+    </div>
+</div>
+
+<div class="relatorio-table p-grid">
+    <div class="p-col-12">
+        <p-table [value]="alugueis" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="dataAluguel" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            DATA
+                            <p-sortIcon field="dataAluguel" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="modeloCarro" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            MODELO
+                            <p-sortIcon field="modeloCarro" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="kmCarro" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            KM
+                            <p-sortIcon field="kmCarro" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="nomeCliente" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            CLIENTE
+                            <p-sortIcon field="nomeCliente" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="telefoneCliente" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            TELEFONE
+                            <p-sortIcon field="telefoneCliente" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="dataDevolucao" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            DEVOLUÇÃO
+                            <p-sortIcon field="dataDevolucao" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="pago" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            PAGO
+                            <p-sortIcon field="pago" />
+                        </div>
+                    </th>
+                    <th pSortableColumn="valor" style="width:20%">
+                        <div class="flex items-center gap-2">
+                            VALOR
+                            <p-sortIcon field="valor" />
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-relatorio>
+                <tr>
+                    <td>{{ relatorio.dataAluguel | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ relatorio.modeloCarro }}</td>
+                    <td>{{ relatorio.kmCarro }}</td>
+                    <td>{{ relatorio.nomeCliente }}</td>
+                    <td>{{ relatorio.telefoneCliente }}</td>
+                    <td>{{ relatorio.dataDevolucao | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                        <p-badge *ngIf="relatorio.pago === 'SIM'" value="SIM" severity="success" />
+                        <p-badge *ngIf="relatorio.pago === 'NAO'" value="NÃO" severity="danger" />
+                    </td>
+                    <td>{{ relatorio.valor | currency: 'BRL' }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-end">
+                    <span>Soma de débitos: {{ relatorios.valorNaoPago | currency: 'BRL' }}</span>
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

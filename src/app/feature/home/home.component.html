@@ -1,5 +1,6 @@
 <div class="flex flex-column gap-3">
   <div class="flex gap-2">
+  <router-outlet></router-outlet>  
   <button type="button" pButton pRipple (click)="show()" label="Show" class="p-button-success"></button>
   <p-button (click)="confirm($event)" icon="pi pi-check" label="Confirm"></p-button>
   </div>

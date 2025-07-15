@@ -1,4 +1,4 @@
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, PRIMARY_OUTLET, Router, RouterOutlet } from '@angular/router';
 import { TOOGLE_SIDEBAR } from './layout.animation';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../template/header/header.component';
 import { SideMenuComponent } from '../template/side-menu/side-menu.component';
 import { FooterComponent } from '../template/footer/footer.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -29,33 +30,64 @@ import { FooterComponent } from '../template/footer/footer.component';
 export class LayoutComponent implements OnInit {
   items!: MenuItem[];
 
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+
   breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
 
   breadcumbsHome!: MenuItem;
 
   ngOnInit(): void {
+
+     //this.breadcumbsHome = { icon: 'pi pi-home', routerLink: '/' };
+
+    // Escuta os eventos de navegação para atualizar o breadcrumb
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.breadcumbs = this.createBreadcrumbs(this.activatedRoute.root);
+    });
+
     this.items = [
       {
-        label: 'Item Menu 1',
-        icon: 'fa fa-search fa-lg',
+        label: 'Alugueis',
+        icon: 'fa fa-car fa-lg',
+        routerLink: 'aluguel',
         command: () => {},
       },
       {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
+        label: 'Relatórios',
+        icon: 'fa fa-file-o fa-lg',
+        routerLink: 'relatorio',
         command: () => {},
       },
     ];
+  }
+
+  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] {
+    const children: ActivatedRoute[] = route.children;
+
+    if (children.length === 0) {
+      return breadcrumbs;
+    }
+
+    for (const child of children) {
+      if (child.outlet !== PRIMARY_OUTLET) {
+        continue;
+      }
+
+      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+      if (routeURL !== '') {
+        url += `/${routeURL}`;
+      }
+
+      // Verifica se a rota possui dados de breadcrumb
+      if (child.snapshot.data['breadcrumb']) {
+        breadcrumbs.push({ label: child.snapshot.data['breadcrumb'], routerLink: url });
+      }
+
+      return this.createBreadcrumbs(child, url, breadcrumbs);
+    }
+    return breadcrumbs;
   }
 
   isOpenMenu: boolean = true;
