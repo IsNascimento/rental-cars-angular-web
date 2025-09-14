@@ -3,9 +3,20 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: '', component: LayoutComponent, children: [
+        path: '',
+        component: LayoutComponent,
+        children: [
             {
-                path: '', loadComponent: () => import('./feature/home/home.component').then(component => component.HomeComponent)
+                path: '',
+                loadComponent: () => import('./feature/home/home.component').then(component => component.HomeComponent)
+            },
+            {
+                path: 'carros',
+                loadComponent: () => import('./feature/carros/carros.component').then(component => component.CarrosComponent)
+            },
+            {
+                path: 'processarArquivo',
+                loadComponent: () => import('./feature/Arquivo/arquivo.component').then(component => component.ArquivoComponent)
             }
         ]
     }

@@ -1,0 +1,32 @@
+<div class="flex flex-column gap-3">
+  <h2>Frota de Carros</h2>
+
+  <p-table [value]="carros" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]"
+    [responsiveLayout]="'scroll'" [style]="{ width: '100%' }"
+    currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} registros">
+    <ng-template pTemplate="header">
+
+      <tr>
+        <th>ID</th>
+        <th>Modelo</th>
+        <th>Ano</th>
+        <th>QTD Passageiros</th>
+        <th>KM</th>
+        <th>Fabricante</th>
+        <th>Valor Diaria</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-carro>
+      <tr>
+        <td>{{ carro.id }}</td>
+        <td>{{ carro.modelo }}</td>
+        <td>{{ carro.ano }}</td>
+        <td>{{ carro.qtdPassageiros }}</td>
+        <td>{{ carro.km }}</td>
+        <td>{{ carro.fabricante }}</td>
+        <td>{{ carro.vlrDiaria }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>

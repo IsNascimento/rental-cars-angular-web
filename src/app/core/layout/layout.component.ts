@@ -1,4 +1,4 @@
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TOOGLE_SIDEBAR } from './layout.animation';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
@@ -29,31 +29,36 @@ import { FooterComponent } from '../template/footer/footer.component';
 export class LayoutComponent implements OnInit {
   items!: MenuItem[];
 
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
+  breadcumbs: MenuItem[] = [{ label: '' }];
 
   breadcumbsHome!: MenuItem;
+
+  constructor(private router: Router) { }
+
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Item Menu 1',
+        label: 'Carros',
         icon: 'fa fa-search fa-lg',
-        command: () => {},
+        command: () => {
+          this.router.navigate(['/carros']);
+        },
       },
       {
         label: 'Item Menu 2',
         icon: 'fa fa-home fa-lg',
-        command: () => {},
+        command: () => { },
       },
       {
-        label: 'Item Menu 3',
+        label: 'Processar Arquivo',
         icon: 'fa fa-folder-open',
-        command: () => {},
+        command: () => { this.router.navigate(['/processarArquivo']) },
       },
       {
         label: 'Item Menu 4',
         icon: ' fa fa-money',
-        command: () => {},
+        command: () => { },
       },
     ];
   }
