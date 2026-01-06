@@ -1,0 +1,101 @@
+ 
+.linha {
+    width: 99%; /* Define a largura da linha */
+    height: 2px; /* Define a altura da linha */
+    background-color: black; /* Define a cor da linha */
+    border: none; /* Remove a borda padrão */
+    margin: 20px auto; /* Centraliza a linha */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  cursor: pointer;
+}
+ 
+/* Estilo para o botão */
+button {
+  background-color: #4CAF50; /* Verde */
+  color: white; /* Texto branco */
+  border: none; /* Sem borda */
+  padding: 10px 15px; /* Espaçamento interno */
+  text-align: center; /* Centralizar texto */
+  text-decoration: none; /* Sem sublinhado */
+  display: inline-block; /* Para permitir o padding */
+  font-size: 16px; /* Tamanho da fonte */
+  margin: 4px 2px; /* Margem */
+  cursor: pointer; /* Cursor de mão ao passar o mouse */
+  border-radius: 5px; /* Borda arredondada */
+  transition: background-color 0.3s; /* Transição suave */
+}
+
+button:hover {
+  background-color: #45a049; /* Cor mais escura ao passar o mouse */
+}
+
+/* Estilo para o input de arquivo */
+input[type="file"] {
+  display: none; /* Ocultar o input padrão */
+}
+
+.file-input-label {
+  background-color: #007bff;  
+  color: white; /* Texto branco */
+  border: none; /* Sem borda */
+  padding: 10px 15px; /* Espaçamento interno */
+  text-align: center; /* Centralizar texto */
+  text-decoration: none; /* Sem sublinhado */
+  display: inline-block; /* Para permitir o padding */
+  font-size: 16px; /* Tamanho da fonte */
+  margin: 4px 2px; /* Margem */
+  width: 20%;
+  cursor: pointer; /* Cursor de mão ao passar o mouse */
+  border-radius: 5px; /* Borda arredondada */
+  transition: background-color 0.3s; /* Transição suave */
+}
+
+.file-input-label:hover {
+  background-color: #008cff; /* Cor mais escura ao passar o mouse */
+}
+
+/* Estilo para a tabela */
+.report-table {
+  width: 99%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Espaço acima da tabela */
+  overflow-x: auto; /* Permitir rolagem horizontal */
+  margin-top: 20px; /* Espaço acima da tabela */
+} 
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left; /* Alinhamento à esquerda */
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* Cor de fundo ao passar o mouse */
+}
+
+.total {
+  text-align: right; // Alinha o texto à direita
+  margin-top: 20px; // Espaçamento superior (opcional)
+  margin: 20px;
+  color: #0a0b0b;
+}

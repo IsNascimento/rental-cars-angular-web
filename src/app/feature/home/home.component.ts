@@ -1,8 +1,9 @@
-import { NotificationService } from './../../shared/services/notification.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { Component } from '@angular/core';
 import { FormGroup  } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogService } from '../../shared/services/confirm-dialog.service';
+import { Router } from '@angular/router'; 
 
 interface City {
   name: string;
@@ -28,7 +29,8 @@ export class HomeComponent {
 
   constructor(
     private notificationService: NotificationService,
-    private confimDialogService: ConfirmDialogService
+    private confimDialogService: ConfirmDialogService,
+    private router: Router
   ) {}
 
   show() {
@@ -48,5 +50,17 @@ export class HomeComponent {
       'Não houve confirmação da exclusão',
       'Item não foi excluido'
     )
+  }
+
+    navigateToUpload() {
+    this.router.navigate(['upload']);
+  }
+
+  navigateToRelatorios() {
+    this.router.navigate(['relatorios']);
+  }
+
+  navigateToFrota() {
+    this.router.navigate(['relatorios']);
   }
 }

@@ -1,23 +1,23 @@
 .layout-topbar {
-    position: fixed;
+    position: fixed; /* Mantém a posição fixa */
     height: 4.5rem;
-    z-index: 997;
+    z-index: 997; /* Z-index da topbar */
     left: 0;
     top: 0;
     width: 100%;
-    background-color: var(--surface-card);
+    background-color: #f8f9fa;
     align-items: center;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, .02), 0px 0px 2px rgba(0, 0, 0, .05), 0px 1px 4px rgba(0, 0, 0, .08);
 
-    &-top{
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      height: 3.5rem;
+    &-top {
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        height: 3.5rem;
     }
 
-    &-bottom{
-      height: 2rem;
+    &-bottom {
+        height: 2rem;
     }
 
     .layout-topbar-logo {
@@ -48,7 +48,7 @@
 
         &:hover {
             color: var(--text-color);
-            background-color: var(--surface-hover);
+            background-color: #f8f9fa;
         }
 
         i {
@@ -85,8 +85,43 @@
     }
 }
 
+.layout-topbar {
+   background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+}
+
+.layout-topbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    height: 40px; /* Ajuste conforme necessário */
+    margin-right: 0.5rem;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.settings-button, .logout-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: color 0.3s;
+}
+
+.settings-button:hover, .logout-button:hover {
+    color: var(--primary-color); /* Altere para a cor desejada */
+}
+
 @media (max-width: 991px) {
     .layout-topbar {
+        position: relative; 
+        z-index: 1;  
+
         justify-content: space-between;
 
         .layout-menu-button {
@@ -104,7 +139,7 @@
             margin-left: 0;
             position: absolute;
             flex-direction: column;
-            background-color: var(--surface-overlay);
+            background-color: #f8f9fa;
             box-shadow: 0px 3px 5px rgba(0, 0, 0, .02), 0px 0px 2px rgba(0, 0, 0, .05), 0px 1px 4px rgba(0, 0, 0, .08);
             border-radius: 12px;
             padding: 1rem;
@@ -116,7 +151,7 @@
             animation: scalein 0.15s linear;
 
             &.layout-topbar-menu-mobile-active {
-                display: block
+                display: block;
             }
 
             .layout-topbar-button {

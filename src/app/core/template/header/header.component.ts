@@ -4,7 +4,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,31 +18,33 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrls: ['./header.component.scss'], 
 })
 export class HeaderComponent implements OnInit {
+
   @Input() items!: MenuItem[];
 
   username!: string | undefined;
-
   initialsName!: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.getUserPrincipal();
   }
 
-  async getUserPrincipal() {
-    // if (await this.keyCloakService.isLoggedIn()) {
-    //   const userPrincipal = this.keyCloakService.loadUserProfile();
-    //   this.username =
-    //     (await userPrincipal).firstName + ' ' + (await userPrincipal).lastName;
-    //   this.getInitials(this.username);
-    // }
+  // Simulação do carregamento do usuário
+  getUserPrincipal() {
+    // Simulando um usuário logado
+    const simulatedUser = {
+      firstName: 'Claudinei',
+      lastName: 'Rocha'
+    };
+
+    this.username = `${simulatedUser.firstName} ${simulatedUser.lastName}`;
+    this.getInitials(this.username);
   }
 
-  // Função para extrair iniciais
   getInitials(fullName: string) {
     let initials = '';
     if (fullName) {
@@ -54,5 +57,11 @@ export class HeaderComponent implements OnInit {
       }
     }
     this.initialsName = initials.toUpperCase();
+  }
+ 
+  logout() {
+    console.log('Saindo...'); 
+    // Aqui você pode adicionar lógica para o logout, se necessário
+    // this.router.navigate(['/login']);
   }
 }

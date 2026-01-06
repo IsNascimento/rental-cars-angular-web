@@ -1,0 +1,46 @@
+<app-header></app-header>
+<main>
+<div class="container">
+    <div class="cabecalho">
+        <h1>Relatórios</h1>
+        <h2>Preencha o filtro para realizar uma pesquisa.</h2>
+        <hr class="linha"> 
+    </div>
+
+    <div>
+      <h2>Upload de Arquivos</h2>
+
+     <label class="file-input-label"> Selecionar Arquivo
+     <input type="file" (change)="onFileChange($event)" multiple />
+     </label>
+  
+  <button (click)="processFiles()">Processar Arquivo</button>
+
+  
+
+   <table class="report-table">
+        <thead>
+          <tr>
+            <th>Nome do Arquivo</th>
+            <th>Extensão</th>
+            <th>Data</th>
+            <th>Tamanho (bytes)</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of files">
+            <td>{{ file.name }}</td>
+            <td>{{ file.extension }}</td>
+            <td>{{ file.date | date:'short' }}</td>
+            <td>{{ file.size }}</td>
+            <td><button (click)="downloadFile(file)">Download</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total">
+        <h3>Total de Arquivos: {{ files.length }}</h3>  
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>
