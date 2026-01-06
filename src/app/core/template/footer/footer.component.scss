@@ -1,0 +1,40 @@
+.footer {
+  background-color: #f8f9fa;
+  position: fixed; /* Torna o rodapé fixo */
+  left: 0; /* Alinha ao lado esquerdo */
+  bottom: 0; /* Alinha ao fundo */
+  width: 100%; /* Ocupa toda a largura da tela */ 
+  padding: 10px 0; /* Espaçamento interno */
+  text-align: center; /* Centraliza o texto */
+  z-index: 1000; /* Garante que o rodapé fique acima de outros elementos */
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    color: #0a0b0b;
+  }
+
+  nav {
+    margin-top: 10px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: inline;
+        margin: 0 15px;
+
+        a {
+          text-decoration: none;
+          color: #0a0b0b;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

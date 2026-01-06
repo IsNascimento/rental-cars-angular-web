@@ -1,17 +1,17 @@
 <div class="layout-topbar align-content-center">
   <div class="layout-topbar-top">
     <div class="layout-topbar-logo gap-2">
-      <span>LOGO</span>
+      <img src="assets/logotipo/logotipo.png" alt="Logotipo da Rental Cars" class="logo-image" />
+      <span class="logo-text">Rental Cars</span>
     </div>
 
     <div class="flex align-items-center gap-2">
-      <span>{{ username }}</span>
-      <p-avatar
-        [label]="initialsName"
-        styleClass="mr-2"
-        size="normal"
-        shape="circle"
-      ></p-avatar>
+      <span class="username">{{ username }}</span>
+      <p-avatar [label]="initialsName" styleClass="mr-2" size="normal" shape="circle"></p-avatar>
+
+      <button class="logout-button" aria-label="Sair" (click)="logout()">
+        <i class="pi pi-sign-out"></i>
+      </button>
     </div>
   </div>
 </div>

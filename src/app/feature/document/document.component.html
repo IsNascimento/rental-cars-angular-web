@@ -1,0 +1,59 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="cabecalho">
+        <h1>Aluguel de Veiculos</h1>
+        <h2>Preencha o filtro para realizar uma pesquisa.</h2>
+    </div>
+    <div class="filters">
+        <div class="filter-group">
+            <label for="date">Data Devolução</label>
+            <input type="date" id="date" [(ngModel)]="filterDate">
+        </div>
+
+        <div class="filter-group">
+            <label for="carModel">Modelo do Carro</label>
+            <input type="text" id="carModel" [(ngModel)]="filterModel" placeholder="Digite o modelo do carro">
+        </div>
+
+        <div class="button-group">
+            <button (click)="search()">Buscar</button>
+            <button class="add-button" (click)="addCar()">
+            <i class="fa fa-plus"></i> Adicionar Carro
+            </button>
+        </div>
+    </div>
+
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Modelo</th>
+        <th>KM</th>
+        <th>Cliente</th>
+        <th>Telefone</th>
+        <th>Devolução</th>
+        <th>Pago</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.date }}</td>
+        <td>{{ report.model }}</td>
+        <td>{{ report.km }}</td>
+        <td>{{ report.client }}</td>
+        <td>{{ report.phone }}</td>
+        <td>{{ report.returnDate }}</td>
+        <td [ngClass]="{'text-success': report.paid, 'text-danger': !report.paid}">
+             {{ report.paid ? 'Sim' : 'Não' }}
+        </td>
+        <td>{{ report.value | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total">
+    <h3>Valor Total: {{ totalValue | currency }}</h3>
+  </div>
+</div>

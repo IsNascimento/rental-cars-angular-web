@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../template/header/header.component';
 import { SideMenuComponent } from '../template/side-menu/side-menu.component';
 import { FooterComponent } from '../template/footer/footer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -24,41 +25,24 @@ import { FooterComponent } from '../template/footer/footer.component';
   providers: [MessageService, ConfirmationService],
   animations: [TOOGLE_SIDEBAR],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  styleUrls: ['./layout.component.scss'], // Corrigido para styleUrls
 })
+
 export class LayoutComponent implements OnInit {
-  items!: MenuItem[];
-
-  breadcumbs: MenuItem[] = [{ label: 'Pagina Inicial' }];
-
+  breadcumbs: MenuItem[] = [{ label: '' }];
   breadcumbsHome!: MenuItem;
 
-  ngOnInit(): void {
-    this.items = [
-      {
-        label: 'Item Menu 1',
-        icon: 'fa fa-search fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
-        command: () => {},
-      },
-    ];
-  }
-
   isOpenMenu: boolean = true;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
+
+  items: MenuItem[] = [
+    { label: 'Página Inicial', icon: 'fa fa-home fa-lg', command: () => this.router.navigate(['']) }, 
+    { label: 'Aluguel de Veiculos', icon: 'fa fa-car', command: () => this.router.navigate(['document']) }, 
+    { label: 'Relatórios', icon: 'fa fa-money', command: () => this.router.navigate(['reports']) },
+  ];
 
   exibirMenu(value: boolean) {
     this.isOpenMenu = value;
